@@ -1,0 +1,37 @@
+.article {
+  line-height: 1.7;
+
+  > * {
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  pre {
+    tab-size: 4;
+    padding: 1em;
+    color: #fff;
+    overflow: auto;
+    border-radius: .75rem;
+    background-color: #333;
+  }
+
+  :not(pre) > code {
+    font-size: smaller;
+    padding: .15rem .5rem;
+    border-radius: .75rem;
+    background-color: rgb(165 243 252);
+  }
+
+  ul {
+    line-height: 2;
+    list-style: disc;
+    margin-left: 1.25rem;
+
+    ::marker {
+      color: rgb(244 114 182 / var(--tw-bg-opacity));
+    }
+  }
+}
