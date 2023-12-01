@@ -12,13 +12,13 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
 export async function loader({ params }: LoaderFunctionArgs) {
   if (Number.isNaN(Number(params.year)) || Number.isNaN(Number(params.id))) {
-    throw json("Not Found", { status: 404 });
+    throw json("Not Found", { status: 404, statusText: "链接格式错误" });
   }
 
   const note = await fetch(`https://paul.ren/api/note/get?id=${params.id}&year=${params.year}`).then((res) => res.json()) as API.Response<API.Note.INoteData>;
 
   if (note.status === "Failed") {
-    throw json("Not Found", { status: 404 });
+    throw json("Not Found", { status: 404, statusText: note.msg });
   }
 
   return json(note);
