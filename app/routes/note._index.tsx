@@ -1,7 +1,9 @@
-import { Link, useLoaderData } from "@remix-run/react";
+import { ChangeEvent, useEffect } from "react";
+import { Link, useLoaderData, useNavigate, useSearchParams } from "@remix-run/react";
 import { json, LoaderFunctionArgs, type MetaFunction } from "@remix-run/node";
+import Pagination from "~/components/common/pagination";
 import { clsn, siteTitle } from "~/utils";
-import { getFirstImage } from "~/utils/note";
+import { getFirstImage, years } from "~/utils/note";
 
 export const meta: MetaFunction = () => {
   return [
@@ -17,11 +19,36 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
   const note = await fetch(`https://paul.ren/api/note/?page=${page}&year=${year}`).then((res) => res.json()) as API.PageResponse<API.Note.INoteData[]>;
 
-  return json({ note, page });
+  return json({ note, page, year });
 }
 
 export default function Note() {
-  const { note } = useLoaderData<typeof loader>();
+  const navigate = useNavigate();
+  const [params, setParams] = useSearchParams();
+  const { note, page, year } = useLoaderData<typeof loader>();
+
+  useEffect(() => {
+    console.log(note);
+  }, []);
+
+  const onChangeYear = (ev: ChangeEvent<HTMLSelectElement>) => {
+    navigate({
+      search: `?year=${ev.target.value}`,
+    });
+  };
+
+  const onChangePage = (value: number) => {
+    const year = params.get("year");
+    const nextParams: Record<string, string> = {
+      page: `${value}`,
+    };
+
+    if (year !== null) {
+      nextParams.year = year;
+    }
+
+    setParams(nextParams);
+  };
 
   return (
     <main className="px-2 py-24 max-w-3xl mx-auto">
@@ -53,6 +80,18 @@ export default function Note() {
             </Link>
           );
         })}
+      </section>
+      <section className="flex gap-4 flex-col-reverse justify-between md:flex-row items-center">
+        <select
+          className="cursor-pointer px-5 py-3 rounded-xl border-4 border-transparent border-b-cyan-200 mr-8"
+          value={year}
+          onChange={onChangeYear}
+        >
+          {years.map((year) => (
+            <option value={year}>{year} 年</option>
+          ))}
+        </select>
+        <Pagination current={Number(page)} size={7} total={note.count} onClick={onChangePage} />
       </section>
     </main>
   );
