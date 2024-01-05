@@ -83,7 +83,7 @@ export default function Note() {
       </section>
       <section className="flex gap-4 flex-col-reverse justify-between md:flex-row items-center">
         <select
-          className="cursor-pointer px-5 py-3 rounded-xl border-4 border-transparent border-b-cyan-200 mr-8"
+          className="cursor-pointer px-5 py-3 rounded-xl border-4 border-transparent border-b-cyan-200"
           value={year}
           onChange={onChangeYear}
         >
