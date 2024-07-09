@@ -51,7 +51,7 @@ function Pagination({ current = 3, total, size, onClick }: PaginationProps) {
     <div>
       {arr.map((item, index) => {
         if (typeof item === "string") {
-          return <span className="p-2 mr-2">{item}</span>
+          return <span key={index} className="p-2 mr-2">{item}</span>
         }
 
         return (

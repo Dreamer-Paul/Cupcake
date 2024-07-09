@@ -27,10 +27,6 @@ export default function Note() {
   const [params, setParams] = useSearchParams();
   const { note, page, year } = useLoaderData<typeof loader>();
 
-  useEffect(() => {
-    console.log(note);
-  }, []);
-
   const onChangeYear = (ev: ChangeEvent<HTMLSelectElement>) => {
     navigate({
       search: `?year=${ev.target.value}`,
@@ -88,7 +84,7 @@ export default function Note() {
           onChange={onChangeYear}
         >
           {years.map((year) => (
-            <option value={year}>{year} 年</option>
+            <option key={year} value={year}>{year} 年</option>
           ))}
         </select>
         <Pagination current={Number(page)} size={7} total={note.count} onClick={onChangePage} />
