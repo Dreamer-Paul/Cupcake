@@ -12,7 +12,7 @@ declare namespace API {
       is_sensitive: boolean
       take_time: string
       modified: number | string // 文件修改时间
-      photo?: File
+      starred: boolean
     }
 
     // 后端加的数据

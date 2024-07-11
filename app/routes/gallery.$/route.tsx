@@ -2,6 +2,7 @@ import { NavLink, useLoaderData, useNavigate } from "@remix-run/react";
 import { json, LoaderFunctionArgs, type MetaFunction } from "@remix-run/node";
 import Pagination from "~/components/common/pagination";
 import { clsn, siteTitle } from "~/utils";
+import { StarFill } from "~/components/common/icons";
 
 import styles from "./styles.module.less";
 
@@ -65,11 +66,21 @@ export default function Gallery() {
       </section>
       <section className="grid gap-8 grid-cols-2 sm:grid-cols-[repeat(auto-fill,minmax(18em,_1fr))] mb-12">
         {media.data.map((item) => (
-          <div key={item.id} className="bg-white rounded-xl overflow-hidden border-4 border-transparent hover:border-pink-400 transition-colors border-b-4 border-b-cyan-200">
+          <div key={item.id} className="relative bg-white rounded-xl overflow-hidden border-4 border-transparent hover:border-pink-400 transition-colors border-b-4 border-b-cyan-200">
             <img className={styles.image} src={item.thumb_url} alt={item.title} loading="lazy" />
-            <div className="relative p-4 sm:p-6 -mt-6 sm:-mt-12">
+            {item.content && (
+              <div className={clsn("absolute top-0 left-0 right-0 bottom-0 bg-opacity-60 bg-black p-4 sm:p-6 text-white leading-7 transition-opacity duration-300 opacity-0 hover:opacity-100", styles.desc)}>
+                {item.content}
+              </div>
+            )}
+            <div className="p-4 sm:p-6 -mt-6 sm:-mt-12">
               <span className="block text-sm mb-4 opacity-60">{item.take_time.substring(0, 10)}</span>
-              <h1 className="text-pink-400 text-xl sm:text-2xl font-bold text-ellipsis overflow-hidden">{item.title}</h1>
+              <h1 className="text-pink-400 text-xl sm:text-2xl font-bold text-ellipsis overflow-hidden">
+                {item.title}
+                {item.starred && (
+                  <StarFill className=" text-yellow-400 w-6 h-6 inline-block ml-2 align-[-.1em]" />
+                )}
+              </h1>
             </div>
           </div>
         ))}

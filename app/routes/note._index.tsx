@@ -1,9 +1,10 @@
-import { ChangeEvent, useEffect } from "react";
-import { Link, useLoaderData, useNavigate, useSearchParams } from "@remix-run/react";
+import { ChangeEvent, useEffect, useState } from "react";
+import { Link, unstable_useViewTransitionState, useLoaderData, useNavigate, useSearchParams } from "@remix-run/react";
 import { json, LoaderFunctionArgs, type MetaFunction } from "@remix-run/node";
 import Pagination from "~/components/common/pagination";
 import { clsn, siteTitle } from "~/utils";
 import { getFirstImage, years } from "~/utils/note";
+import { StarFill, ThumbUpFill } from "~/components/common/icons";
 
 export const meta: MetaFunction = () => {
   return [
@@ -61,11 +62,21 @@ export default function Note() {
               key={item.id}
               className="block group relative overflow-hidden p-5 bg-white rounded-xl mb-8 last:mb-0 border-4 border-transparent hover:border-pink-400 transition-colors border-b-cyan-200"
               to={`/note/${year}/${item.id}`}
+              unstable_viewTransition
             >
-              <h2 className="text-pink-400 text-2xl font-bold mb-4">{item.title}</h2>
-              <p className={clsn(cover && "mr-40", "mb-8")}>{item.except}</p>
+              {item.starred && (
+                <StarFill className="absolute -top-5 -right-5 w-28 h-28 text-yellow-300 text-opacity-20 -rotate-[23deg]" />
+              )}
+              <h2 className="text-pink-400 text-2xl font-bold mb-4" style={{ viewTransitionName: `note-title-${item.id}` }}>
+                {item.title}
+              </h2>
+              <p className={clsn(cover && "mr-40", "mb-8 relative")}>{item.except}</p>
               <div className="flex items-end justify-between text-sm">
                 <p className="opacity-60">{item.date}</p>
+                <span className="flex items-center opacity-60">
+                  <ThumbUpFill className="h-4 w-4 mr-1" />
+                  {item.likes}
+                </span>
               </div>
               {cover && (
                 <div

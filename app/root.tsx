@@ -56,7 +56,7 @@ export function ErrorBoundary() {
 }
 
 export const links: LinksFunction = () => [
-  { rel: "icon", href: "icon.png" },
+  { rel: "icon", href: "/icon.png" },
   { rel: "stylesheet", href: "https://cdn-font.hyperos.mi.com/font/css?family=MiSans:100,200,300,400,450,500,600,650,700,900:Chinese_Simplify,Latin&display=swap" },
 ];
 
