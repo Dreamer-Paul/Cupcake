@@ -1,5 +1,5 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { Link, unstable_useViewTransitionState, useLoaderData, useNavigate, useSearchParams } from "@remix-run/react";
+import { ChangeEvent } from "react";
+import { Link, useLoaderData, useNavigate, useSearchParams } from "@remix-run/react";
 import { json, LoaderFunctionArgs, type MetaFunction } from "@remix-run/node";
 import Pagination from "~/components/common/pagination";
 import { clsn, siteTitle } from "~/utils";

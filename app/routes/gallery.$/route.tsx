@@ -64,7 +64,7 @@ export default function Gallery() {
           ))}
         </div>
       </section>
-      <section className="grid gap-8 grid-cols-2 sm:grid-cols-[repeat(auto-fill,minmax(18em,_1fr))] mb-12">
+      <section className="grid gap-4 lg:gap-8 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mb-12">
         {media.data.map((item) => (
           <div key={item.id} className="relative bg-white rounded-xl overflow-hidden border-4 border-transparent hover:border-pink-400 transition-colors border-b-4 border-b-cyan-200">
             <img className={styles.image} src={item.thumb_url} alt={item.title} loading="lazy" />
