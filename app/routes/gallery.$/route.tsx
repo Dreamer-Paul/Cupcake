@@ -36,7 +36,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   const media = await fetch(`https://paul.ren/api/media/?${searchParams.toString()}`).then((res) => res.json()) as unknown as API.PageResponse<API.Media.IMediaData[]>;
   const currentCategory = cateIndex > -1 ? category.data[cateIndex]: undefined;
 
-  return json({ media, category, currentCategory, page });
+  return { media, category, currentCategory, page };
 }
 
 export default function Gallery() {

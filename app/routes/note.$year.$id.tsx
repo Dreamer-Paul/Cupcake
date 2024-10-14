@@ -23,7 +23,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
     throw json("Not Found", { status: 404, statusText: note.msg });
   }
 
-  return json(note);
+  return note;
 }
 
 export default function Detail() {
@@ -77,4 +77,4 @@ export default function Detail() {
       </section>
     </main>
   );
-};
+}

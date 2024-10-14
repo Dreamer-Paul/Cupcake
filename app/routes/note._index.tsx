@@ -1,6 +1,6 @@
 import { ChangeEvent } from "react";
 import { Link, useLoaderData, useNavigate, useSearchParams } from "@remix-run/react";
-import { json, LoaderFunctionArgs, type MetaFunction } from "@remix-run/node";
+import { LoaderFunctionArgs, type MetaFunction } from "@remix-run/node";
 import Pagination from "~/components/common/pagination";
 import { clsn, siteTitle } from "~/utils";
 import { getFirstImage, years } from "~/utils/note";
@@ -20,7 +20,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
   const note = await fetch(`https://paul.ren/api/note/?page=${page}&year=${year}`).then((res) => res.json()) as API.PageResponse<API.Note.INoteData[]>;
 
-  return json({ note, page, year });
+  return { note, page, year };
 }
 
 export default function Note() {
@@ -62,7 +62,7 @@ export default function Note() {
               key={item.id}
               className="block group relative overflow-hidden p-5 bg-white rounded-xl mb-8 last:mb-0 border-4 border-transparent hover:border-pink-400 transition-colors border-b-cyan-200"
               to={`/note/${year}/${item.id}`}
-              unstable_viewTransition
+              viewTransition
             >
               {item.starred && (
                 <StarFill className="absolute -top-5 -right-5 w-28 h-28 text-yellow-300 text-opacity-20 -rotate-[23deg]" />

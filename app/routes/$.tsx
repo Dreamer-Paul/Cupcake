@@ -19,7 +19,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
     throw json("Not Found", { status: 404, statusText: page.msg });
   }
 
-  return json(page);
+  return page;
 }
 
 export default function DynamicPage() {
@@ -36,4 +36,4 @@ export default function DynamicPage() {
       </section>
     </main>
   );
-};
+}
