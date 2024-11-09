@@ -67,11 +67,11 @@ export default function Note() {
               {item.starred && (
                 <StarFill className="absolute -top-5 -right-5 w-28 h-28 text-yellow-300 text-opacity-20 -rotate-[23deg]" />
               )}
-              <h2 className="text-pink-400 text-2xl font-bold mb-4" style={{ viewTransitionName: `note-title-${item.id}` }}>
+              <h2 className={clsn(cover && "mr-40", "text-pink-400 text-2xl font-bold mb-4")} style={{ viewTransitionName: `note-title-${item.id}` }}>
                 {item.title}
               </h2>
               <p className={clsn(cover && "mr-40", "mb-8 relative")}>{item.except}</p>
-              <div className="flex items-end justify-between text-sm">
+              <div className={clsn(cover && "mr-40", "flex items-end justify-between text-sm")}>
                 <p className="opacity-60">{item.date}</p>
                 <span className="flex items-center opacity-60">
                   <ThumbUpFill className="h-4 w-4 mr-1" />

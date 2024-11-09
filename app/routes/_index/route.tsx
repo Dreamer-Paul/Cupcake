@@ -1,8 +1,11 @@
-import type { MetaFunction } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
+import { type MetaFunction } from "@remix-run/node";
 import { siteTitle } from "~/utils";
-import { BiliBili, CloudMusic, GitHub, QQ, Steam, TwitterX } from "~/components/common/icons";
+import { ArrowDown, BiliBili, CloudMusic, GitHub, QQ, Steam, TwitterX } from "~/components/common/icons";
 
 import styles from "./styles.module.less";
+
+const year = new Date().getFullYear();
 
 export const meta: MetaFunction = () => {
   return [
@@ -11,10 +14,20 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export async function loader() {
+  const data = (await fetch("https://paul.ren/api/sync").then((res) =>
+    res.json()
+  )) as unknown as API.Response<API.Sync.ISyncData>;
+
+  return { data };
+}
+
 export default function Index() {
+  const { data } = useLoaderData<typeof loader>();
+
   return (
-    <main className="px-2 py-24">
-      <section className="flex flex-col h-[60vh] max-w-2xl mx-auto">
+    <main className="px-2 py-24 max-w-3xl mx-auto">
+      <section className="-mt-40 relative flex flex-col h-screen min-h-[40rem] max-w-3xl mx-auto">
         <div className="my-auto px-4 py-10 bg-white rounded-xl text-center">
           <div className="mx-auto w-40 mb-10 relative select-none">
             <div className="top-4 left-2 w-36 h-36 rounded-full absolute bg-pink-100"></div>
@@ -43,6 +56,44 @@ export default function Index() {
             </a>
           </p>
         </div>
+        <ArrowDown className="absolute left-0 right-0 bottom-20 mx-auto w-10 h-10 opacity-60 animate-bounce" />
+      </section>
+
+      <section className="mb-16">
+        <h2 className="text-3xl mb-4">近期博文</h2>
+        <div className="bg-white rounded-xl p-5">
+          {data.data.blog.map((item) => (
+            <p key={item.link} className="flex mb-3 last:mb-0">
+              <a className="flex-1" href={item.link} target="_blank" rel="noreferrer">{item.title}</a>
+              <span className="font-mono opacity-50">{item.date}</span>
+            </p>
+          ))}
+          </div>
+      </section>
+
+      <section className="mb-16">
+        <h2 className="text-3xl mb-4">近期日记</h2>
+        <div className="bg-white rounded-xl p-5">
+          {data.data.note.map((item) => (
+            <p key={item.id} className="flex mb-3 last:mb-0">
+              <Link className="flex-1" to={`/note/${year}/${item.id}`}>{item.title}</Link>
+              <span className="font-mono opacity-50">{item.date}</span>
+            </p>
+          ))}
+          </div>
+      </section>
+
+      <section>
+        <h2 className="text-3xl mb-4">近期捕获</h2>
+        <div className="bg-white rounded-xl p-5 grid grid-cols-2 gap-5">
+          {data.data.media.map((item) => (
+            <div key={item.id}>
+              <img className="mb-3 rounded-xl" src={item.thumb_url} alt={item.title} />
+              <h3 className="text-lg mb-1">{item.title}</h3>
+              <p className="text-xs opacity-50">{item.take_time.substring(0, 10)}</p>
+            </div>
+          ))}
+          </div>
       </section>
     </main>
   );
