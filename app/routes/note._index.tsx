@@ -67,11 +67,11 @@ export default function Note() {
               {item.starred && (
                 <StarFill className="absolute -top-5 -right-5 w-28 h-28 text-yellow-300 text-opacity-20 -rotate-[23deg]" />
               )}
-              <h2 className={clsn(cover && "mr-40", "text-pink-400 text-2xl font-bold mb-4")} style={{ viewTransitionName: `note-title-${item.id}` }}>
+              <h2 className={clsn(cover && "md:mr-40", "text-pink-400 text-2xl font-bold mb-4")} style={{ viewTransitionName: `note-title-${item.id}` }}>
                 {item.title}
               </h2>
-              <p className={clsn(cover && "mr-40", "mb-8 relative")}>{item.except}</p>
-              <div className={clsn(cover && "mr-40", "flex items-end justify-between text-sm")}>
+              <p className={clsn(cover && "sm:mr-40", "mb-8 relative")}>{item.except}</p>
+              <div className={clsn(cover && "mb-40 sm:mb-0 sm:mr-40", "flex items-end justify-between text-sm")}>
                 <p className="opacity-60">{item.date}</p>
                 <span className="flex items-center opacity-60">
                   <ThumbUpFill className="h-4 w-4 mr-1" />
@@ -80,7 +80,7 @@ export default function Note() {
               </div>
               {cover && (
                 <div
-                  className="absolute top-0 right-0 bottom-0 w-40 transition-opacity bg-cover opacity-30 group-hover:opacity-80"
+                  className="absolute h-40 sm:h-auto sm:w-40 left-0 sm:top-0 sm:left-[unset] right-0 bottom-0 transition-opacity bg-cover opacity-30 group-hover:opacity-80"
                   style={{ backgroundImage: `url("${cover}")`, clipPath: "polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
                 />
               )}

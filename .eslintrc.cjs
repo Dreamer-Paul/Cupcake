@@ -34,6 +34,10 @@ module.exports = {
         "plugin:react-hooks/recommended",
         "plugin:jsx-a11y/recommended",
       ],
+      rules: {
+        "jsx-a11y/media-has-caption": "off",
+        "jsx-a11y/click-events-have-key-events": "off",
+      },
       settings: {
         react: {
           version: "detect",

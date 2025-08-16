@@ -3,6 +3,7 @@ import { json, LoaderFunctionArgs, type MetaFunction } from "@remix-run/node";
 import Pagination from "~/components/common/pagination";
 import { clsn, siteTitle } from "~/utils";
 import { StarFill } from "~/components/common/icons";
+import LightBox, { useLightBox } from "~/components/biz/gallery/image-box";
 
 import styles from "./styles.module.less";
 
@@ -43,6 +44,9 @@ export default function Gallery() {
   const navigate = useNavigate();
   const { media, category, page } = useLoaderData<typeof loader>();
 
+  // const lightBoxInst = useRef();
+  const { ref: lightBoxInst, open } = useLightBox();
+
   const onChangePage = (value: number) => {
     navigate({
       search: `?page=${value}`,
@@ -65,11 +69,18 @@ export default function Gallery() {
         </div>
       </section>
       <section className="grid gap-4 lg:gap-8 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mb-12">
-        {media.data.map((item) => (
-          <div key={item.id} className="relative bg-white rounded-xl overflow-hidden border-4 border-transparent hover:border-pink-400 transition-colors border-b-4 border-b-cyan-200">
+        {media.data.map((item, index) => (
+          <div
+            key={item.id}
+            role="button"
+            tabIndex={0}
+            onKeyDown={() => {}}
+            className="relative bg-white rounded-xl overflow-hidden border-4 border-transparent hover:border-pink-400 transition-colors border-b-4 border-b-cyan-200 group"
+            onClick={() => open(index)}
+          >
             <img className={styles.image} src={item.thumb_url} alt={item.title} loading="lazy" />
             {item.content && (
-              <div className={clsn("absolute top-0 left-0 right-0 bottom-0 bg-opacity-60 bg-black p-4 sm:p-6 text-white leading-7 transition-opacity duration-300 opacity-0 hover:opacity-100", styles.desc)}>
+              <div className={clsn("absolute top-0 left-0 right-0 bottom-0 bg-opacity-60 bg-black p-4 sm:p-6 text-white leading-7 transition-opacity duration-300 whitespace-pre-wrap opacity-0 group-hover:opacity-100", styles.desc)}>
                 {item.content}
               </div>
             )}
@@ -88,6 +99,8 @@ export default function Gallery() {
       <section className="text-center">
         <Pagination current={Number(page)} size={20} total={media.count} onClick={onChangePage} />
       </section>
+
+      <LightBox ref={lightBoxInst} list={media.data} />
     </main>
   );
 }

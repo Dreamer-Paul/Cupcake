@@ -10,6 +10,7 @@ declare namespace API {
       hidden: boolean
       hidden_ref: boolean
       is_sensitive: boolean
+      author: string
       take_time: string
       modified: number | string // 文件修改时间
       starred: boolean
