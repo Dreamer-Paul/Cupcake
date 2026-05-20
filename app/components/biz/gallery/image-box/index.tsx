@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useRef, useImperativeHandle, forwardRef, Ref } from 'react';
+import React, { useState, useRef, useImperativeHandle, forwardRef, type Ref } from "react";
 import { createPortal } from 'react-dom';
 import { clsn } from '~/utils';
 

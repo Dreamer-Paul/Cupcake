@@ -1,20 +1,26 @@
-import { NavLink, useLoaderData, useNavigate } from "@remix-run/react";
-import { json, LoaderFunctionArgs, type MetaFunction } from "@remix-run/node";
-import Pagination from "~/components/common/pagination";
-import { clsn, siteTitle } from "~/utils";
-import { StarFill } from "~/components/common/icons";
+import { NavLink, useNavigate } from "react-router";
+
 import LightBox, { useLightBox } from "~/components/biz/gallery/image-box";
+import { StarFill } from "~/components/ui/icons";
+import Pagination from "~/components/ui/pagination";
+import { clsn, siteTitle } from "~/utils";
 
-import styles from "./styles.module.less";
+import type { Route } from "./+types/gallery";
+import styles from "./gallery.module.css";
 
-export const meta: MetaFunction<typeof loader> = ({ data }) => {
+export function meta({ loaderData }: Route.MetaArgs) {
   return [
-    { title: siteTitle(data?.currentCategory?.name || "相册") },
-    { name: "description", content: data?.currentCategory?.description || "奇趣保罗的照片与收藏" },
+    { title: siteTitle(loaderData?.currentCategory?.name || "相册") },
+    {
+      name: "description",
+      content:
+        loaderData?.currentCategory?.description ||
+        "奇趣保罗的照片与收藏",
+    },
   ];
-};
+}
 
-export async function loader({ request, params }: LoaderFunctionArgs) {
+export async function loader({ request, params }: Route.LoaderArgs) {
   const url = new URL(request.url);
   const page = url.searchParams.get("page") || "1";
 
@@ -28,7 +34,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     cateIndex = category.data.findIndex((item) => item.slug === params["*"]);
 
     if (cateIndex === -1) {
-      throw json("Not Found", { status: 404 });
+      throw new Response("Not Found", { status: 404 });
     }
 
     searchParams.append("cate", String(category.data[cateIndex].id));
@@ -40,9 +46,9 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   return { media, category, currentCategory, page };
 }
 
-export default function Gallery() {
+export default function Gallery({ loaderData }: Route.ComponentProps) {
   const navigate = useNavigate();
-  const { media, category, page } = useLoaderData<typeof loader>();
+  const { media, category, page } = loaderData;
 
   // const lightBoxInst = useRef();
   const { ref: lightBoxInst, open } = useLightBox();

@@ -55,16 +55,16 @@ function Pagination({ current = 3, total, size, onClick }: PaginationProps) {
         }
 
         return (
-          <span
+          <button
             key={index}
             className={clsn(
-              "inline-block w-10 h-10 leading-[2] md:w-14 md:h-14 md:leading-[3] cursor-pointer text-center mr-2 last:mr-0 rounded-xl border-4 border-transparent hover:bg-pink-400 hover:border-b-transparent hover:text-white transition-colors",
+              "inline-block w-10 h-10 leading-loose md:w-14 md:h-14 md:leading-[3] cursor-pointer text-center mr-2 last:mr-0 rounded-xl border-4 border-transparent hover:bg-pink-400 hover:border-b-transparent hover:text-white transition-colors",
               current === item ? "bg-cyan-200 border-b-cyan-300 text-white font-bold" : "bg-white border-b-cyan-200"
             )}
             onClick={() => onClick(item)}
           >
             {item}
-          </span>
+          </button>
         );
       })}
     </div>

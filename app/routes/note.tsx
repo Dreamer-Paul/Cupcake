@@ -1,19 +1,21 @@
-import { ChangeEvent } from "react";
-import { Link, useLoaderData, useNavigate, useSearchParams } from "@remix-run/react";
-import { LoaderFunctionArgs, type MetaFunction } from "@remix-run/node";
-import Pagination from "~/components/common/pagination";
+import { type ChangeEvent } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router";
+
+import { StarFill, ThumbUpFill } from "~/components/ui/icons";
+import Pagination from "~/components/ui/pagination";
 import { clsn, siteTitle } from "~/utils";
 import { getFirstImage, years } from "~/utils/note";
-import { StarFill, ThumbUpFill } from "~/components/common/icons";
 
-export const meta: MetaFunction = () => {
+import type { Route } from "./+types/note";
+
+export function meta({}: Route.MetaArgs) {
   return [
     { title: siteTitle("日记") },
     { name: "description", content: "奇趣保罗的日常笔记" },
   ];
-};
+}
 
-export async function loader({ request }: LoaderFunctionArgs) {
+export async function loader({ request }: Route.LoaderArgs) {
   const url = new URL(request.url);
   const year = url.searchParams.get("year") || new Date().getFullYear();
   const page = url.searchParams.get("page") || 1;
@@ -23,10 +25,10 @@ export async function loader({ request }: LoaderFunctionArgs) {
   return { note, page, year };
 }
 
-export default function Note() {
+export default function Note({ loaderData }: Route.ComponentProps) {
   const navigate = useNavigate();
   const [params, setParams] = useSearchParams();
-  const { note, page, year } = useLoaderData<typeof loader>();
+  const { note, page, year } = loaderData;
 
   const onChangeYear = (ev: ChangeEvent<HTMLSelectElement>) => {
     navigate({
@@ -90,7 +92,7 @@ export default function Note() {
       </section>
       <section className="flex gap-4 flex-col-reverse justify-between md:flex-row items-center">
         <select
-          className="cursor-pointer px-5 py-3 rounded-xl border-4 border-transparent border-b-cyan-200"
+          className="cursor-pointer px-5 py-3 rounded-xl bg-white border-4 border-transparent border-b-cyan-200"
           value={year}
           onChange={onChangeYear}
         >

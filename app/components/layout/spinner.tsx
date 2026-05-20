@@ -1,4 +1,4 @@
-import { useNavigation } from "@remix-run/react";
+import { useNavigation } from "react-router";
 
 export default function SpinnerBar() {
   const navigation = useNavigation();

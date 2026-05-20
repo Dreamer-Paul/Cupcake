@@ -1,4 +1,4 @@
-import { NavLink } from "@remix-run/react";
+import { NavLink } from "react-router";
 
 const navItems = [
   { name: "首页", to: "/" },

@@ -1,9 +1,0 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@media screen and (max-width: 639px) {
-  :root {
-    font-size: 14px;
-  }
-}

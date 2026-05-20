@@ -1,5 +1,5 @@
 import { clsn } from "~/utils";
-import styles from "./article.module.less";
+import styles from "./article.module.css";
 
 interface ArticleProps {
   className?: string;

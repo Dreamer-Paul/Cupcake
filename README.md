@@ -26,4 +26,4 @@
 
 ## 感谢
 
-本项目采用 Remix + React + TypeScript + Less + Tailwind 作为主要的技术栈，感谢所有开源库作者提供的解决方案！
+本项目采用 React 19 + TypeScript + React Router 7 + Tailwind 4 作为主要的技术栈，感谢所有开源库作者提供的解决方案！
