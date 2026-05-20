@@ -8,6 +8,7 @@ import {
   QQ,
   Steam,
   TwitterX,
+  Feed,
 } from "~/components/ui/icons";
 import { siteTitle } from "~/utils";
 
@@ -62,6 +63,9 @@ export default function Index({ loaderData }: Route.ComponentProps) {
             </a>
             <a href="https://steamcommunity.com/id/dreamer-paul" target="_blank" rel="noreferrer" title="Steam">
               <Steam className="w-6" />
+            </a>
+            <a href="https://paul.ren/feed" target="_blank" title="订阅 RSS">
+              <Feed className="w-6" />
             </a>
           </p>
         </div>

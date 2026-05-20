@@ -50,7 +50,7 @@ export default function Note({ loaderData }: Route.ComponentProps) {
   };
 
   return (
-    <main className="px-2 py-24 max-w-3xl mx-auto">
+    <main className="px-2 py-24 max-w-4xl mx-auto">
       <section className="mb-12">
         <h1 className="text-center text-5xl/tight md:text-7xl/tight">日记</h1>
       </section>
@@ -67,13 +67,13 @@ export default function Note({ loaderData }: Route.ComponentProps) {
               viewTransition
             >
               {item.starred && (
-                <StarFill className="absolute -top-5 -right-5 w-28 h-28 text-yellow-300 text-opacity-20 -rotate-[23deg]" />
+                <StarFill className="absolute -top-5 -right-5 w-28 h-28 text-yellow-300 text-opacity-20 rotate-[-23deg]" />
               )}
-              <h2 className={clsn(cover && "md:mr-40", "text-pink-400 text-2xl font-bold mb-4")} style={{ viewTransitionName: `note-title-${item.id}` }}>
+              <h2 className={clsn(cover && "mt-48 sm:mt-0 md:mr-40", "text-pink-400 text-2xl font-bold mb-4")} style={{ viewTransitionName: `note-title-${item.id}` }}>
                 {item.title}
               </h2>
               <p className={clsn(cover && "sm:mr-40", "mb-8 relative")}>{item.except}</p>
-              <div className={clsn(cover && "mb-40 sm:mb-0 sm:mr-40", "flex items-end justify-between text-sm")}>
+              <div className={clsn(cover && "sm:mr-40", "flex items-end justify-between text-sm")}>
                 <p className="opacity-60">{item.date}</p>
                 <span className="flex items-center opacity-60">
                   <ThumbUpFill className="h-4 w-4 mr-1" />
@@ -82,8 +82,8 @@ export default function Note({ loaderData }: Route.ComponentProps) {
               </div>
               {cover && (
                 <div
-                  className="absolute h-40 sm:h-auto sm:w-40 left-0 sm:top-0 sm:left-[unset] right-0 bottom-0 transition-opacity bg-cover opacity-30 group-hover:opacity-80"
-                  style={{ backgroundImage: `url("${cover}")`, clipPath: "polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+                  className="absolute h-48 sm:h-auto sm:w-40 left-0 top-0 sm:left-[unset] right-0 sm:bottom-0 transition-opacity bg-cover opacity-80 sm:opacity-30 group-hover:opacity-80 sm:[clip-path:polygon(25%_0%,100%_0%,100%_100%,0%_100%)]"
+                  style={{ backgroundImage: `url("${cover}")` }}
                 />
               )}
             </Link>

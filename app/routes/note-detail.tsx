@@ -53,7 +53,7 @@ export default function NoteDetail({ loaderData }: Route.ComponentProps) {
   };
 
   return (
-    <main className="px-2 py-24 max-w-3xl mx-auto">
+    <main className="px-2 py-24 max-w-4xl mx-auto">
       <section className="mb-12">
         <h1
           className="text-center text-5xl/tight md:text-7xl/tight mb-4"
@@ -63,7 +63,7 @@ export default function NoteDetail({ loaderData }: Route.ComponentProps) {
         </h1>
         <p className="text-center opacity-60">{note.data.date}</p>
       </section>
-      <section className="p-5 bg-white rounded-xl border-b-4 border-b-cyan-200 mb-8">
+      <section className="p-5 md:p-12 bg-white rounded-xl border-b-4 border-b-cyan-200 mb-16">
         <Article html={note.data.content_html} />
       </section>
       <section className="flex gap-16 items-center justify-center text-base md:text-lg">

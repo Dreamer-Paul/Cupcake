@@ -81,7 +81,7 @@ export default function Gallery({ loaderData }: Route.ComponentProps) {
             role="button"
             tabIndex={0}
             onKeyDown={() => {}}
-            className="relative bg-white rounded-xl overflow-hidden border-4 border-transparent hover:border-pink-400 transition-colors border-b-4 border-b-cyan-200 group"
+            className="relative bg-white rounded-xl overflow-hidden border-4 border-transparent hover:border-pink-400 transition-colors border-b-4 border-b-cyan-200 group cursor-pointer"
             onClick={() => open(index)}
           >
             <img className={styles.image} src={item.thumb_url} alt={item.title} loading="lazy" />

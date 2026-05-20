@@ -28,12 +28,12 @@ export default function DynamicPage({ loaderData }: Route.ComponentProps) {
   const page = loaderData;
 
   return (
-    <main className="px-2 py-24 max-w-3xl mx-auto">
+    <main className="px-2 py-24 max-w-4xl mx-auto">
       <section className="mb-12">
         <h1 className="text-center text-5xl/tight md:text-7xl/tight mb-4">{page.data.title}</h1>
         <p className="text-center opacity-60">{page.data.desc}</p>
       </section>
-      <section className="p-5 bg-white rounded-xl border-b-4 border-b-cyan-200">
+      <section className="p-5 md:p-12 bg-white rounded-xl border-b-4 border-b-cyan-200">
         <Article html={page.data.content} />
       </section>
     </main>

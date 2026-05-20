@@ -67,7 +67,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <main className="px-2 py-24 max-w-3xl mx-auto">
+    <main className="px-2 py-24 max-w-4xl mx-auto">
       <h1 className="text-center text-5xl/tight md:text-7xl/tight mb-2">
         {message}
       </h1>
