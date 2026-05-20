@@ -4,6 +4,7 @@ import LightBox, { useLightBox } from "~/components/biz/gallery/image-box";
 import { StarFill } from "~/components/ui/icons";
 import Pagination from "~/components/ui/pagination";
 import { clsn, siteTitle } from "~/utils";
+import { getImageThumbUrl } from "~/utils/media";
 
 import type { Route } from "./+types/gallery";
 import styles from "./gallery.module.css";
@@ -84,9 +85,9 @@ export default function Gallery({ loaderData }: Route.ComponentProps) {
             className="relative bg-white rounded-xl overflow-hidden border-4 border-transparent hover:border-pink-400 transition-colors border-b-4 border-b-cyan-200 group cursor-pointer"
             onClick={() => open(index)}
           >
-            <img className={styles.image} src={item.thumb_url} alt={item.title} loading="lazy" />
+            <img className={styles.image} src={getImageThumbUrl(item.url)} alt={item.title} loading="lazy" />
             {item.content && (
-              <div className={clsn("absolute top-0 left-0 right-0 bottom-0 bg-opacity-60 bg-black p-4 sm:p-6 text-white leading-7 transition-opacity duration-300 whitespace-pre-wrap opacity-0 group-hover:opacity-100", styles.desc)}>
+              <div className={clsn("absolute top-0 left-0 right-0 bottom-0 bg-black/60 p-4 sm:p-6 text-white leading-7 transition-opacity duration-300 whitespace-pre-wrap opacity-0 group-hover:opacity-100", styles.desc)}>
                 {item.content}
               </div>
             )}

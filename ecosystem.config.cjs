@@ -2,10 +2,9 @@ module.exports = {
   apps: [
     {
       name: "cupcake",
-      script: "pnpm",
-      args: "start",
+      script: "./node_modules/@react-router/serve/bin.js",
+      args: "./build/server/index.js",
       cwd: __dirname,
-      interpreter: "none",
       instances: 1,
       exec_mode: "fork",
       autorestart: true,

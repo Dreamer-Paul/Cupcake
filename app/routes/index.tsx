@@ -115,9 +115,9 @@ export default function Index({ loaderData }: Route.ComponentProps) {
           {data.data.media.map((item) => (
             <div
               key={item.id}
-              className="flex flex-col overflow-hidden bg-white rounded-xl border-4 border-transparent hover:border-pink-400 transition-colors border-b-cyan-200"
+              className="flex flex-col overflow-hidden bg-white rounded-xl border-4 border-transparent hover:border-pink-400 transition-colors border-b-cyan-200 cursor-pointer"
             >
-              <img className="w-full aspect-4/3 object-cover" src={getImageThumbUrl(item.thumb_url, { height: 450, width: 900 })} alt={item.title} />
+              <img className="w-full aspect-4/3 object-cover" src={getImageThumbUrl(item.url)} alt={item.title} />
               <div className="flex flex-col flex-1 p-5">
                 <h3 className="text-pink-400 text-xl font-semibold flex-1 truncate mb-4">{item.title}</h3>
                 <p className="text-sm opacity-50">{item.take_time.substring(0, 10)}</p>

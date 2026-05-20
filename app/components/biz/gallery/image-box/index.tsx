@@ -142,12 +142,9 @@ function LightBox({ className, list }: LightBoxProps, ref: Ref<LightBoxInst>) {
         "fixed inset-0 z-50 flex flex-col bg-orange-50 overflow-auto animate-fade-in",
         state.fadeOut && "animate-fade-out",
         state.loading && "loading",
-        className
+        className,
       )}
     >
-      <div className="bg-pink-400 py-5 px-2 h-16 text-center">
-        <h2 className="text-xl/tight text-white">{title}</h2>
-      </div>
       <div className="md:flex md:flex-row flex-1 overflow-auto">
         <div
           className="h-[calc(100%-6em)] md:h-auto flex-1 flex flex-col"
@@ -173,7 +170,7 @@ function LightBox({ className, list }: LightBoxProps, ref: Ref<LightBoxInst>) {
           </div>
           <div
             ref={selectorRef}
-            className="flex gap-4 p-4 overflow-auto bg-black bg-opacity-10"
+            className="flex gap-2 p-4 overflow-auto bg-black/10"
           >
             {list.map((item, index) => (
               <img
