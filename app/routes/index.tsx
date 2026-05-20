@@ -11,8 +11,10 @@ import {
   Feed,
 } from "~/components/ui/icons";
 import { siteTitle } from "~/utils";
+import { getImageThumbUrl } from "~/utils/media";
 
 import type { Route } from "./+types/index";
+
 import styles from "./index.module.css";
 
 const year = new Date().getFullYear();
@@ -36,15 +38,15 @@ export default function Index({ loaderData }: Route.ComponentProps) {
   const { data } = loaderData;
 
   return (
-    <main className="px-2 py-24 max-w-3xl mx-auto">
-      <section className="-mt-40 relative flex flex-col h-screen min-h-160 max-w-3xl mx-auto">
-        <div className="my-auto px-4 py-10 bg-white rounded-xl text-center">
-          <div className="mx-auto w-40 mb-10 relative select-none">
+    <main className="px-2 py-24">
+      <section className="-mt-40 relative flex flex-col h-screen min-h-160 max-w-4xl mx-auto">
+        <div className="my-auto text-center">
+          <div className="mx-auto w-40 mb-12 relative select-none">
             <div className="top-4 left-2 w-36 h-36 rounded-full absolute bg-pink-100"></div>
             <img className={styles.avatar} src="/avatar.webp" alt="奇趣保罗" />
           </div>
-          <h1 className="text-5xl mb-4">奇趣保罗</h1>
-          <p className="opacity-60 mb-10">一只正在学习前后端技术的萌新</p>
+          <h1 className="text-5xl md:text-7xl mb-4">奇趣保罗</h1>
+          <p className="opacity-60 mb-12">一只正在学习前后端技术的萌新</p>
           <p className="flex justify-center gap-3">
             <a href="https://paul.ren/join-group" target="_blank" rel="noreferrer" title="企鹅群">
               <QQ className="w-6" />
@@ -72,41 +74,57 @@ export default function Index({ loaderData }: Route.ComponentProps) {
         <ArrowDown className="absolute left-0 right-0 bottom-20 mx-auto w-10 h-10 opacity-60 animate-bounce" />
       </section>
 
-      <section className="mb-16">
-        <h2 className="text-3xl mb-4">近期博文</h2>
-        <div className="bg-white rounded-xl p-5">
+      <section className="max-w-4xl mx-auto mb-24">
+        <h2 className="text-5xl text-center mb-10">近期博文</h2>
+        <div className="grid grid-cols-2 gap-5">
           {data.data.blog.map((item) => (
-            <p key={item.link} className="flex mb-3 last:mb-0">
-              <a className="flex-1" href={item.link} target="_blank" rel="noreferrer">{item.title}</a>
-              <span className="font-mono opacity-50">{item.date}</span>
-            </p>
+            <a
+              key={item.link}
+              href={item.link}
+              target="_blank"
+              className="flex flex-col bg-white rounded-xl p-5 border-4 border-transparent hover:border-pink-400 transition-colors border-b-cyan-200"
+            >
+              <h3 className="text-pink-400 text-xl font-semibold truncate mb-4">{item.title}</h3>
+              <p className="text-sm leading-relaxed flex-1 line-clamp-2 mb-4">{item.content}</p>
+              <span className="text-sm opacity-50">{item.date}</span>
+            </a>
           ))}
-          </div>
+        </div>
       </section>
 
-      <section className="mb-16">
-        <h2 className="text-3xl mb-4">近期日记</h2>
-        <div className="bg-white rounded-xl p-5">
+      <section className="max-w-4xl mx-auto mb-24">
+        <h2 className="text-5xl text-center mb-10">近期日记</h2>
+        <div className="grid grid-cols-2 gap-5">
           {data.data.note.map((item) => (
-            <p key={item.id} className="flex mb-3 last:mb-0">
-              <Link className="flex-1" to={`/note/${year}/${item.id}`}>{item.title}</Link>
-              <span className="font-mono opacity-50">{item.date}</span>
-            </p>
+            <Link
+              key={item.id}
+              to={`/note/${year}/${item.id}`}
+              className="flex flex-col bg-white rounded-xl p-5 border-4 border-transparent hover:border-pink-400 transition-colors border-b-cyan-200"
+            >
+              <h3 className="text-pink-400 text-xl font-semibold truncate mb-4">{item.title}</h3>
+              <p className="text-sm leading-relaxed flex-1 line-clamp-2 mb-4">{item.except}</p>
+              <span className="text-sm opacity-50">{item.date}</span>
+            </Link>
           ))}
-          </div>
+        </div>
       </section>
 
-      <section>
-        <h2 className="text-3xl mb-4">近期捕获</h2>
-        <div className="bg-white rounded-xl p-5 grid grid-cols-2 gap-5">
+      <section className="max-w-screen-2xl mx-auto">
+        <h2 className="text-5xl text-center mb-10">近期捕获</h2>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
           {data.data.media.map((item) => (
-            <div key={item.id}>
-              <img className="mb-3 rounded-xl" src={item.thumb_url} alt={item.title} />
-              <h3 className="text-lg mb-1">{item.title}</h3>
-              <p className="text-xs opacity-50">{item.take_time.substring(0, 10)}</p>
+            <div
+              key={item.id}
+              className="flex flex-col overflow-hidden bg-white rounded-xl border-4 border-transparent hover:border-pink-400 transition-colors border-b-cyan-200"
+            >
+              <img className="w-full aspect-4/3 object-cover" src={getImageThumbUrl(item.thumb_url, { height: 450, width: 900 })} alt={item.title} />
+              <div className="flex flex-col flex-1 p-5">
+                <h3 className="text-pink-400 text-xl font-semibold flex-1 truncate mb-4">{item.title}</h3>
+                <p className="text-sm opacity-50">{item.take_time.substring(0, 10)}</p>
+              </div>
             </div>
           ))}
-          </div>
+        </div>
       </section>
     </main>
   );

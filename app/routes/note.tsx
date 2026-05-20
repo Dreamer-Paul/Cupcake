@@ -69,7 +69,7 @@ export default function Note({ loaderData }: Route.ComponentProps) {
               {item.starred && (
                 <StarFill className="absolute -top-5 -right-5 w-28 h-28 text-yellow-300 text-opacity-20 rotate-[-23deg]" />
               )}
-              <h2 className={clsn(cover && "mt-48 sm:mt-0 md:mr-40", "text-pink-400 text-2xl font-bold mb-4")} style={{ viewTransitionName: `note-title-${item.id}` }}>
+              <h2 className={clsn(cover && "mt-48 sm:mt-0 sm:mr-40", "text-pink-400 text-2xl font-bold mb-4")} style={{ viewTransitionName: `note-title-${item.id}` }}>
                 {item.title}
               </h2>
               <p className={clsn(cover && "sm:mr-40", "mb-8 relative")}>{item.except}</p>
