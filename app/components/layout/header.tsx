@@ -6,6 +6,7 @@ const navItems = [
   { name: "首页", to: "/" },
   { name: "日记", to: "/note" },
   { name: "相册", to: "/gallery" },
+  { name: "语录", to: "/say" },
   { name: "关于我", to: "/about" },
 ];
 

@@ -1,0 +1,47 @@
+.item {
+  &:nth-child(2n) {
+    border-bottom-color: #fde047;
+  }
+
+  &:nth-child(3n) {
+    border-bottom-color: #84cc16;
+  }
+
+  &:nth-child(4n) {
+    border-bottom-color: #2dd4bf;
+  }
+
+  &:nth-child(5n) {
+    border-bottom-color: #fb923c;
+  }
+
+  &:nth-child(6n) {
+    border-bottom-color: #a78bfa;
+  }
+}
+
+.like .active::after {
+  content: "♥";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #f87171;
+  animation: like-float 1s forwards;
+}
+
+@keyframes like-float {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-1.5em);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-1.5em);
+  }
+}

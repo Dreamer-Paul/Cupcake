@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useRef, useImperativeHandle, forwardRef, type Ref } from "react";
-import { createPortal } from 'react-dom';
-import { clsn } from '~/utils';
+import { createPortal } from "react-dom";
+import { X } from "~/components/ui/icons";
+import { clsn } from "~/utils";
 
 const parseMeta = (metaStr: string) => {
   try {
@@ -151,6 +152,9 @@ function LightBox({ className, list }: LightBoxProps, ref: Ref<LightBoxInst>) {
           onWheel={onScroll}
         >
           <div className="flex-1 flex relative p-4" role="img" aria-label={title} onClick={onClose}>
+            <button className="absolute top-4 left-4 z-2 p-2 rounded-xl text-xl font-semibold text-pink-700 bg-black/60 cursor-pointer" onClick={onClose}>
+              <X className="w-6 h-6" />
+            </button>
             {isVideo ? (
               <video
                 src={src}

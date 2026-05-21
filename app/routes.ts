@@ -11,6 +11,7 @@ export default [
     route("note", "routes/note.tsx"),
     route("note/:year/:id", "routes/note-detail.tsx"),
     route("gallery/*", "routes/gallery.tsx"),
+    route("say", "routes/say.tsx"),
     route("*", "routes/page.tsx"),
   ]),
 ] satisfies RouteConfig;
